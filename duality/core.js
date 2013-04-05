@@ -692,7 +692,7 @@ exports.parseResponse = function (req, res) {
 exports.processFlashmessagesAndCookies = function (req, res) {
     if (flashmessages) {
         res = flashmessages.updateResponse(req, res);
-    } else {
+    } else if (!settings.duality || !settings.duality.no_baseUrlCookie) {
         // set the baseURL cookie for the browser
         var baseURL = utils.getBaseURL(req);
         cookies.setResponseCookie(req, res, {
